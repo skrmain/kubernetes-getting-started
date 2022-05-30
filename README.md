@@ -1,52 +1,35 @@
-### Repository for the K8s in 1 hour video
+# Kubernetes Getting Started
 
-#### K8s manifest files 
-* mongo-config.yaml
-* mongo-secret.yaml
-* mongo.yaml
-* webapp.yaml
+## Notes
 
-#### K8s commands
+> Minikube Installation
 
-##### start Minikube and check status
-    minikube start --vm-driver=hyperkit 
-    minikube status
+- https://minikube.sigs.k8s.io/docs/start/
 
-##### get minikube node's ip address
-    minikube ip
+```sh
+minikube start
 
-##### get basic info about k8s components
-    kubectl get node
-    kubectl get pod
-    kubectl get svc
-    kubectl get all
+minikube status
 
-##### get extended info about components
-    kubectl get pod -o wide
-    kubectl get node -o wide
+kubectl get node
 
-##### get detailed info about a specific component
-    kubectl describe svc {svc-name}
-    kubectl describe pod {pod-name}
+kubectl apply -f <file-name.yaml>
 
-##### get application logs
-    kubectl logs {pod-name}
-    
-##### stop your Minikube cluster
-    minikube stop
+kubectl get all
 
-<br />
+kubectl get configmaps
 
-> :warning: **Known issue - Minikube IP not accessible** 
+kubectl get secrets
 
-If you can't access the NodePort service webapp with `MinikubeIP:NodePort`, execute the following command:
-    
-    minikube service webapp-service
+kubectl describe service <service-name>
+kubectl describe pod <pod-name>
 
-<br />
+kubectl logs -f <pod-name>
 
-#### Links
-* mongodb image on Docker Hub: https://hub.docker.com/_/mongo
-* webapp image on Docker Hub: https://hub.docker.com/repository/docker/nanajanashia/k8s-demo-app
-* k8s official documentation: https://kubernetes.io/docs/home/
-* webapp code repo: https://gitlab.com/nanuchi/developing-with-docker/-/tree/feature/k8s-in-hour
+minikube ip
+```
+
+## References
+
+- https://youtu.be/s_o8dwzRlu4
+- https://gitlab.com/nanuchi/k8s-in-1-hour
