@@ -29,7 +29,20 @@ kubectl logs -f <pod-name>
 minikube ip
 ```
 
+```sh
+# To launch bash of a pod container 
+kubectl exec --stdin --tty <POD> -- /bin/bash
+
+# to restart a deployment
+kubectl rollout restart deployment <deployment name>
+
+# to delete
+kubectl delete <Component[pod, deployment,...]t> <component_id>
+```
+
 ## References
 
 - https://youtu.be/s_o8dwzRlu4
 - https://gitlab.com/nanuchi/k8s-in-1-hour
+- https://minikube.sigs.k8s.io/docs/start/
+- https://kompose.io/ --> Convert Docker-compose --> Kubernetes Configs

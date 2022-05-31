@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-server-deployment
+  labels:
+    app: product-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: product-server
+  template:
+    metadata:
+      labels:
+        app: product-server
+    spec:
+      containers:
+      - name: product-server
+        image: skr571999/product-microservices_product-server:0.1
+        ports:
+        - containerPort: 8000
+        env:
+        - name: MYSQL_HOSTNAME
+          valueFrom:
+            configMapKeyRef:
+              name: product-config
+              key: mysql-host
+        - name: MYSQL_USER
+          valueFrom:
+            configMapKeyRef:
+              name: product-config
+              key: mysql-user
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              name: product-config
+              key: mysql-password
+        - name: MYSQL_DATABASE
+          valueFrom:
+            configMapKeyRef:
+              name: product-config
+              key: mysql-database
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: product-server-service
+spec:
+  type: NodePort
+  selector:
+    app: product-server
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+      nodePort: 30200
